@@ -1,7 +1,7 @@
 from Vector import Vector
 from Transform import Transform
-
-class Ethereum:
+from Mesh import Mesh
+class Pyramid(Mesh):
     def __init__(self,transform = Transform()):
         self.transform = transform
         pyramid_vectors = []
