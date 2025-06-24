@@ -1,17 +1,17 @@
 from Vector import Vector
 
 class Transform:
-    def __init__(self):
-        self.scale = Vector(1,1,1)
-        self.rotation = Vector(0,0,0)
-        self.position = Vector(0,0,0)
+    def __init__(self,scale=Vector(1,1,1),rotation = Vector(0,0,0),position = Vector(0,0,0)):
+        self.scale = scale
+        self.rotation = rotation
+        self.position = position
         
 
     @classmethod
-    def EulerAngle(cls):
+    def euler_angle(cls):
         pass
 
     @classmethod
-    def Translate(cls,a=Vector(),b=Vector(),time = 0):
+    def translate(cls,a=Vector(),b=Vector(),time = 0):
         pass 
         

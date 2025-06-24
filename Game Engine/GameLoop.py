@@ -19,3 +19,4 @@ class GameLoop:
         )
 
     asyncio.run(main())
+

@@ -1,6 +1,6 @@
-from math import sqrt,acos,radians,degrees
+from math import sqrt,acos,radians,degrees,cos,sin
 from Point import Point
-
+import numpy as np
 class Vector:
     def __init__(self,x=0,y=0,z=0):
         self.vector = Point(x,y,z)
@@ -18,41 +18,41 @@ class Vector:
             raise TypeError("Unsupported operand type(s) for *")
         
     @classmethod
-    def Zero(cls):
+    def zero(cls):
         return Point(0,0,0)
     
     @classmethod
-    def Up(cls):
+    def up(cls):
         return Point(0,1,0)
     
     @classmethod
-    def Forward(cls):
+    def forward(cls):
         return Point(0,0,1)
     
     @classmethod
-    def Right(cls):
+    def right(cls):
         return Point(1,0,0)
     
     @classmethod
-    def DotProduct(cls,a=Point(),b=Point()):
+    def dot_product(cls,a=Point(),b=Point()):
         '''
         Returns the dot product of two vectors
         '''
         return a.x * b.x + a.y * b.y + a.z * b.z
     
     @classmethod
-    def CrossProduct(cls,a=Point(),b=Point()):
+    def cross_product(cls,a=Point(),b=Point()):
         '''
         Returns the cross product of two vectors
         '''
         newVector = Point()
-        newVector.x = a.y * b.z + a.z * b.y
-        newVector.y = a.z * b.x + a.x * b.z
-        newVector.z = a.x * b.y + a.y * b.x
+        newVector.x = a.y * b.z - a.z * b.y
+        newVector.y = a.z * b.x - a.x * b.z
+        newVector.z = a.x * b.y - a.y * b.x
         return newVector
 
     @classmethod
-    def AddVectors(cls,a=Point(),b=Point()):
+    def add_vectors(cls,a=Point(),b=Point()):
         '''
         Adds vector a to vector b and returns the answer
         '''
@@ -63,7 +63,7 @@ class Vector:
         return newVector
     
     @classmethod
-    def Distance(cls,a=Point(),b=Point()):
+    def distance(cls,a=Point(),b=Point()):
         '''
         Returns the distance between two vectors
         '''
@@ -71,7 +71,7 @@ class Vector:
         return distance
     
     @classmethod
-    def Magnitude(cls,a=Point()):
+    def magnitude(cls,a=Point()):
         '''
         Returns the length of vector a
         '''
@@ -79,7 +79,7 @@ class Vector:
         return lenght
     
     @classmethod
-    def Normalized(cls,a=Point()):
+    def normalized(cls,a=Point()):
         '''
         Returns the normalized vector of vector a
         '''
@@ -91,7 +91,7 @@ class Vector:
         return normalizedVector
     
     @classmethod
-    def Angle(cls,a=Point(),b=Point(),is_rad = True):
+    def angle(cls,a=Point(),b=Point(),is_rad = True):
         '''
         Returns the angle between two vectors, is_rad determines the angle in radians else in degrees
         '''
@@ -100,9 +100,72 @@ class Vector:
         return angle
     
     @classmethod
-    def Lerp(cls,a=Point(),b=Point(),time = 0):
+    def get_rotation_matrix_x(cls,angle = 0):
+        '''
+        Returns the rotation matrix for x
+        '''
+        rotation_matrix = []
+        rotation_matrix.extend([
+            [1,0,0],
+            [0,cos(angle),-sin(angle)],
+            [0,sin(angle),cos(angle)]
+            ])
+        return rotation_matrix
+    
+    @classmethod
+    def get_rotation_matrix_y(cls,angle = 0):
+        '''
+        Returns the rotation matrix for y
+        '''
+        rotation_matrix = []
+        rotation_matrix.extend([
+            [cos(angle),0,sin(angle)],
+            [0,1,0],
+            [-sin(angle),0,cos(angle)]
+            ])
+        return rotation_matrix
+    
+    @classmethod
+    def get_rotation_matrix_z(cls,angle = 0):
+        '''
+        Returns the rotation matrix for z
+        '''
+        rotation_matrix = []
+        rotation_matrix.extend([
+            [cos(angle),-sin(angle),0],
+            [sin(angle),cos(angle),0],
+            [0,0,1]
+            ])
+        return rotation_matrix
+    
+    @classmethod
+    def convert_to_matrix(cls,a=Point()):
+        matrix = []
+        matrix.extend([
+            [a.x],
+            [a.y],
+            [a.z]
+            ])
+        return matrix
+    
+    @classmethod
+    def convert_to_vector_list(cls,a):
+        matrix = []
+        matrix.extend([
+            [a[0][0]],
+            [a[1][1]],
+            [a[2][2]]
+            ])
+        return matrix
+    
+    @classmethod
+    def multiply_matrix(cls,a,b):
+        return np.multiply(a,b)
+
+    @classmethod
+    def lerp(cls,a=Point(),b=Point(),time = 0):
         pass
 
     @classmethod
-    def Project(cls,a=Point(),b=Point(),has_angle = False,angle=0):
+    def project(cls,a=Point(),b=Point(),has_angle = False,angle=0):
         pass 

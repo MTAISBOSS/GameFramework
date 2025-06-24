@@ -7,11 +7,11 @@ class Physic:
         pass
 
     @classmethod
-    def SetGravity(cls,height=0,time=0.1):
+    def set_gravity(cls,height=0,time=0.1):
         gravity = height / (2 * (time ** 2))
         return gravity
 
     @classmethod
-    def JumpSpeed(cls,height=0):
+    def jump_speed(cls,height=0):
         speed = sqrt(2* height* Physic.gravity)
         return speed
