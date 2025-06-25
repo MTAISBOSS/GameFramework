@@ -1,5 +1,5 @@
 from Component import Component
-class ColliderComponent(Component):
+class AABBCollider(Component):
     def __init__(self, gameobject):
         super().__init__(gameobject)
         self.colliding_with = []
