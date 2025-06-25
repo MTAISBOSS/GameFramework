@@ -19,7 +19,7 @@ class Ethereum(Mesh):
             modified_vector = vector.vector + transform.position.vector
             modified_ethereum_vectors.append(modified_vector)
 
-        self.ethereum = modified_ethereum_vectors
+        super().points = modified_ethereum_vectors
 
     def get_connected_points(self):
         points = [
