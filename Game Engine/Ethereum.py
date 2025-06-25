@@ -1,9 +1,9 @@
 from Vector import Vector
 from Transform import Transform
-
-class Ethereum:
+from Mesh import Mesh
+class Ethereum(Mesh):
     def __init__(self,transform = Transform()):
-        self.transform = transform
+        super().transform = transform
         ethereum_vectors = []
         ethereum_vectors.append(Vector(1,0,1))
         ethereum_vectors.append(Vector(-1,0,1))
@@ -19,7 +19,7 @@ class Ethereum:
             modified_vector = vector.vector + transform.position.vector
             modified_ethereum_vectors.append(modified_vector)
 
-        self.ethereum = modified_ethereum_vectors
+        super().points = modified_ethereum_vectors
 
     def get_connected_points(self):
         points = [
