@@ -1,3 +1,4 @@
 class Mesh:
     def __init__(self):
-        pass
+        self.points = []
+        self.overlap = False
