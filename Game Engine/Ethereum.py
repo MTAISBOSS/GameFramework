@@ -3,7 +3,7 @@ from Transform import Transform
 from Mesh import Mesh
 class Ethereum(Mesh):
     def __init__(self,transform = Transform()):
-        self.transform = transform
+        super().transform = transform
         ethereum_vectors = []
         ethereum_vectors.append(Vector(1,0,1))
         ethereum_vectors.append(Vector(-1,0,1))
