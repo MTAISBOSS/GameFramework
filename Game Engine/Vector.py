@@ -16,7 +16,10 @@ class Vector:
             return Vector(self.vector * other.vector)
         else:
             raise TypeError("Unsupported operand type(s) for *")
-        
+
+    def __hash__(self):
+        return hash(self.vector)
+      
     @classmethod
     def zero(cls):
         return Point(0,0,0)
@@ -164,8 +167,14 @@ class Vector:
 
     @classmethod
     def lerp(cls,a=Point(),b=Point(),time = 0):
-        pass
+       new_vector =Point()
+       new_vector = a + ((b-a) * time)
+       return Vector(new_vector.x,new_vector.y,new_vector.z).vector
 
     @classmethod
-    def project(cls,a=Point(),b=Point(),has_angle = False,angle=0):
-        pass 
+    def project(cls,a=Point(),b=Point()):
+        '''
+        Projects vector a on vector b
+        ''' 
+        proj = ((Vector.dot_product(a,b) / (Vector.magnitude(b) ** 2)) * b)
+        return Vector(proj.x,proj.y,proj.z)
