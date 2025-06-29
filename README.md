@@ -12,3 +12,6 @@ I have learnt about geometry and implemented two meshes from scrath, first one i
 
 ## Refactor
 I just relized that my functions are upper camel case which is wrong convention for python, just fixed the function names and refactored my game loop and meshes and put them in a good structure for future use
+
+## TDD
+I was reading clean code book, and I saw the world "TDD", and rom now on I write tests for my classes, it actually is very usefull, nmy vector class had many issues but duo to testing i fixed the issues
