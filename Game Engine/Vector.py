@@ -7,13 +7,19 @@ class Vector:
 
     def __add__(self, other):
         if isinstance(other, Vector):
-            return Vector(self.vector + other.vector)
+            return self.vector + other.vector
         else:
             raise TypeError("Unsupported operand type(s) for +")
-    
+        
+    def __sub__(self, other):
+        if isinstance(other, Vector):
+            return self.vector - other.vector
+        else:
+            raise TypeError("Unsupported operand type(s) for +")
+
     def __mul__(self,other):
         if isinstance(other, Vector):
-            return Vector(self.vector * other.vector)
+            return self.vector * other.vector
         else:
             raise TypeError("Unsupported operand type(s) for *")
 
@@ -44,7 +50,7 @@ class Vector:
         return a.x * b.x + a.y * b.y + a.z * b.z
     
     @classmethod
-    def cross_product(cls,a=Point(),b=Point()):
+    def cross_product(cls,a=Point(z=0),b=Point(z=0)):
         '''
         Returns the cross product of two vectors
         '''
@@ -78,15 +84,17 @@ class Vector:
         '''
         Returns the length of vector a
         '''
+        min_lenght = 0.0001
         lenght = sqrt((a.x)**2 + (a.y)**2 + (a.z)**2)
-        return lenght
+
+        return max(lenght,min_lenght)
     
     @classmethod
     def normalized(cls,a=Point()):
         '''
         Returns the normalized vector of vector a
         '''
-        lenght = Vector.Magnitude(a)
+        lenght = Vector.magnitude(a)
         normalizedVector = Point()
         normalizedVector.x = a.x / lenght
         normalizedVector.y = a.y / lenght
@@ -98,7 +106,7 @@ class Vector:
         '''
         Returns the angle between two vectors, is_rad determines the angle in radians else in degrees
         '''
-        angle = acos((Vector.DotProduct(a,b)) / (Vector.Magnitude(a) * Vector.Magnitude(b)))
+        angle = acos((Vector.dot_product(a,b)) / (Vector.magnitude(a) * Vector.magnitude(b)))
         angle = degrees(angle) if not is_rad else angle
         return angle
     
@@ -145,9 +153,9 @@ class Vector:
     def convert_to_matrix(cls,a=Point()):
         matrix = []
         matrix.extend([
-            [a.x],
-            [a.y],
-            [a.z]
+            [a.x,0,0],
+            [0,a.y,0],
+            [0,0,a.z]
             ])
         return matrix
     
