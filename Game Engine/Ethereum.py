@@ -6,16 +6,15 @@ class Ethereum(Mesh):
     def __init__(self, transform=Transform()):
         super().__init__()
         self.transform = transform
-        self.color = (100, 75, 200, 150)  # Ethereum purple with transparency
+        self.color = (100, 75, 200, 150)
         
-        # Define base points
         self.points = [
             Vector(1, 0, 1),
             Vector(-1, 0, 1),
             Vector(-1, 0, -1),
             Vector(1, 0, -1),
-            Vector(0, 2, 0),  # Top point
-            Vector(0, -2, 0)  # Bottom point
+            Vector(0, 2, 0),
+            Vector(0, -2, 0)
         ]
     
     def get_connected_points(self):
@@ -32,17 +31,14 @@ class Ethereum(Mesh):
         ]
     
     def draw(self, parent):
-        """Custom Ethereum drawing with thicker center lines"""
         transformed_points = self.get_transformed_points()
         screen_points = []
         
-        # Project points
         for point in transformed_points:
             x = point.x + 400
             y = point.y + 300
             screen_points.append((x, y))
         
-        # Draw faces
         for face in self.get_faces():
             if len(face) >= 3:
                 points = [screen_points[i] for i in face[:3]]
@@ -52,7 +48,6 @@ class Ethereum(Mesh):
                     parent=parent
                 )
         
-        # Draw edges with custom styling
         for edge in self.get_connected_points():
             if edge[0] < len(screen_points) and edge[1] < len(screen_points):
                 thickness = 2 if (4 in edge or 5 in edge) else 1
