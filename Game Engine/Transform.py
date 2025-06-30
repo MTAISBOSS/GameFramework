@@ -5,7 +5,9 @@ class Transform:
         self.scale = scale
         self.rotation = rotation
         self.position = position
-        
+        self.local_scale = scale
+        self.local_rotation = rotation
+        self.local_position = position
 
     @classmethod
     def euler_angle(cls):
