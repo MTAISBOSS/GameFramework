@@ -35,8 +35,8 @@ class Ethereum(Mesh):
         screen_points = []
         
         for point in transformed_points:
-            x = point.x + 400
-            y = point.y + 300
+            x = point.vector.x + 400
+            y = point.vector.y + 300
             screen_points.append((x, y))
         
         for face in self.get_faces():
