@@ -32,16 +32,16 @@ class Ethereum(Mesh):
     
     def draw(self, parent):
         transformed_points = self.get_transformed_points()
-        screen_points = []
+        self.screen_points = []
         
         for point in transformed_points:
-            x = point.vector.x + 400
-            y = point.vector.y + 300
-            screen_points.append((x, y))
+            x = point.x + 400
+            y = point.y + 300
+            self.screen_points.append((x, y))
         
         for face in self.get_faces():
             if len(face) >= 3:
-                points = [screen_points[i] for i in face[:3]]
+                points = [self.screen_points[i] for i in face[:3]]
                 dpg.draw_triangle(
                     points[0], points[1], points[2],
                     color=(*self.color[:3], 50), fill=(*self.color[:3], 20),
@@ -49,6 +49,6 @@ class Ethereum(Mesh):
                 )
         
         for edge in self.get_connected_points():
-            if edge[0] < len(screen_points) and edge[1] < len(screen_points):
+            if edge[0] < len(self.screen_points) and edge[1] < len(self.screen_points):
                 thickness = 2 if (4 in edge or 5 in edge) else 1
-                dpg.draw_line(screen_points[edge[0]], screen_points[edge[1]],color=(150, 100, 255, 255) if thickness > 1 else self.color,thickness=thickness,parent=parent)
+                dpg.draw_line(self.screen_points[edge[0]], self.screen_points[edge[1]],color=(150, 100, 255, 255) if thickness > 1 else self.color,thickness=thickness,parent=parent)
