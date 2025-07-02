@@ -105,7 +105,26 @@ class Vector(np.ndarray):
     @classmethod
     def lerp(cls, a, b, time=0):
         return a + (b - a) * time
-    
+    @classmethod
+    def slerp(cls, a, b, time=0):
+        a_norm = Vector.normalized(a)
+        b_norm = Vector.normalized(b)
+        
+        cos_theta = Vector.dot(a_norm, b_norm)
+        
+        if cos_theta > 0.9995:
+            return Vector.lerp(a_norm, b_norm, time)
+        
+        cos_theta = max(-1.0, min(1.0, cos_theta))
+        
+        theta = acos(cos_theta)
+        sin_theta = sin(theta)
+        
+        wa = sin((1 - time) * theta) / sin_theta
+        wb = sin(time * theta) / sin_theta
+        
+        return (a_norm * wa) + (b_norm * wb)
+
     @classmethod
     def project(cls, a, b):
         return (np.dot(a, b) / np.dot(b, b)) * b
