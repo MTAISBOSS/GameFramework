@@ -2,8 +2,10 @@ from Transform import Transform
 import dearpygui.dearpygui as dpg
 import numpy as np
 from Vector import Vector
-class Mesh:
-    def __init__(self):
+from Component import Component
+class Mesh(Component):
+    def __init__(self,gameobject):
+        super().__init__(gameobject)
         self.points = []
         self.transform = Transform()
         self.color = (255, 255, 255, 255)
