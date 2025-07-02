@@ -1,9 +1,9 @@
 from Transform import Transform
 
 class GameObject:
-    def __init__(self,name="GameObject"):
+    def __init__(self,name="GameObject",transform = Transform()):
         self.components = []
-        self.transform = Transform()
+        self.transform = transform
 
     def add_component(self,cls_component):
         '''
