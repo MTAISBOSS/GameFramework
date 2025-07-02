@@ -125,25 +125,26 @@ def update():
     update_projectiles()
 
 def handle_input_release(sender, app_data):
-    global direction
-    if app_data == dpg.mvKey_Right or app_data == dpg.mvKey_D:
-        direction = Vector.zero
+    pass
 
 def handle_input(sender, app_data):
     global direction, look_direction
     if app_data == dpg.mvKey_Right or app_data == dpg.mvKey_D:
-        direction = Vector(1,0,0) * speed * time.delta_time
+        direction = Vector(1,0,0)
+        triangle.transform.position += direction * speed * time.delta_time 
     elif app_data == dpg.mvKey_Left or app_data == dpg.mvKey_A:
-        direction = Vector(-1,0,0) * speed * time.delta_time
+        direction = Vector(-1,0,0)
+        triangle.transform.position += direction * speed * time.delta_time 
     elif app_data == dpg.mvKey_Up or app_data == dpg.mvKey_W:
-        direction = Vector(0,-1,0) * speed * time.delta_time
+        direction = Vector(0,-1,0)
+        triangle.transform.position += direction * speed * time.delta_time 
     elif app_data == dpg.mvKey_Down or app_data == dpg.mvKey_S:
-        direction = Vector(0,1,0) * speed * time.delta_time
+        direction = Vector(0,1,0)
+        triangle.transform.position += direction * speed * time.delta_time 
     elif app_data == dpg.mvKey_Spacebar:
         shoot(look_direction)
     
-    triangle.transform.position += direction 
-
+    print(triangle.transform.position)
 ##########################################################
 # Draw
 with dpg.window(label="Main Window"):
